@@ -8,7 +8,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => { console.log(`Server running on http://localhost:${PORT}`); });
+
 const PUBLIC_DIR = path.join(__dirname, "public");
 
 
@@ -336,4 +336,5 @@ io.on("connection", (socket)=>{
 });
 
 app.get("*", (_req,res)=>res.sendFile(path.join(PUBLIC_DIR, "index.html")));
-server.listen(PORT, ()=>console.log(`Server running on http://localhost:${PORT}`));
+server.listen(PORT, ()=>{console.log(`Server running on http://localhost:${PORT}`);
+});
