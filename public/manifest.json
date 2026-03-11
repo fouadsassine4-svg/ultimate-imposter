@@ -1,0 +1,16 @@
+{
+  "name": "Ultimate Imposter Party",
+  "short_name": "Imposter Party",
+  "display": "standalone",
+  "background_color": "#120b2e",
+  "theme_color": "#6d3bff",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

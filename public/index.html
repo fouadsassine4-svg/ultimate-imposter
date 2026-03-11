@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#6d3bff">
+  <link rel="manifest" href="/manifest.json">
+  <title>Ultimate Imposter Party</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="top">
+      <div class="card hero">
+        <div class="heroTop">
+          <div>
+            <h1>🎭 Ultimate Imposter Party</h1>
+            <p class="sub">Realtime room code + QR multiplayer. Every player joins on their own phone, gets private role info, and votes live.</p>
+          </div>
+          <div class="row">
+            <button class="ghost" id="installBtn">Install App</button>
+          </div>
+        </div>
+        <div class="badges">
+          <div class="badge">📱 QR Join</div>
+          <div class="badge">⚡ Live Sync</div>
+          <div class="badge">🎭 Roles</div>
+          <div class="badge">🧠 Similar Word</div>
+        </div>
+        <div class="installHint" id="installHint">Create a room on one phone or computer, then let others join with QR or room code.</div>
+      </div>
+      <div class="card">
+        <h2>Room</h2>
+        <div id="roomBox" class="mini">Not connected yet.</div>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="card">
+        <section id="joinScreen">
+          <h2>Join or Create Room</h2>
+          <div class="row">
+            <input id="playerName" placeholder="Your player name">
+          </div>
+          <div class="row">
+            <input id="roomCode" placeholder="Room code">
+            <button id="joinBtn" class="secondary">Join Room</button>
+            <button id="createBtn" class="success">Create Room</button>
+          </div>
+          <div id="qrPanel" class="hidden qrPanel">
+            <img id="qrImage" alt="Room QR">
+            <div class="mini" id="qrText"></div>
+          </div>
+        </section>
+
+        <section id="lobbyScreen" class="hidden">
+          <h2>Lobby</h2>
+          <div id="hostControls" class="hidden">
+            <div class="row">
+              <select id="categorySelect"></select>
+              <select id="imposterCountSelect"></select>
+              <select id="minutesSelect">
+                <option value="1">1 min</option>
+                <option value="2">2 min</option>
+                <option value="3" selected>3 min</option>
+                <option value="4">4 min</option>
+                <option value="5">5 min</option>
+              </select>
+            </div>
+            <div class="row">
+              <select id="rolesSelect">
+                <option value="on">Roles ON</option>
+                <option value="off">Roles OFF</option>
+              </select>
+              <select id="modeSelect">
+                <option value="classic">Classic</option>
+                <option value="similar">Similar Word</option>
+                <option value="chaos">Chaos</option>
+                <option value="speed">Speed</option>
+                <option value="hardcore">Hardcore</option>
+              </select>
+              <button id="startRoundBtn" class="success">Start Round</button>
+            </div>
+          </div>
+
+          <button id="rulesBtn" class="ghost">Game Rules</button>
+          <div id="rulesBox" class="hidden mini">
+            <strong>How the game works</strong><br><br>
+            One or more players are imposters. Most players see the real word. In Similar Word / Hardcore mode, imposters get a fake similar word. Everyone discusses, then votes live on their phones.<br><br>
+            <strong>Roles</strong><br>
+            🕵️ Detective — knows one imposter<br>
+            🤡 Jester — wins if voted out<br>
+            👻 Ghost — cannot vote<br>
+            🌀 Shapeshifter — gets an unstable random word<br>
+            🎯 Sniper — gets bonus point for correctly voting an imposter<br>
+            🔥 Chaos Agent — wins if the vote is total confusion
+          </div>
+
+          <h3>Players</h3>
+          <div id="playersList" class="players"></div>
+        </section>
+
+        <section id="revealScreen" class="hidden revealWrap">
+          <div class="revealName" id="revealTitle"></div>
+          <div class="muted" id="revealMeta"></div>
+          <p class="muted" id="revealHint">Tap the card, then swipe up.</p>
+          <div class="revealCard" id="revealCard">
+            <div class="cardFace front">
+              <div class="bigEmoji">🎉</div>
+              <h2>Your Private Role</h2>
+              <p>Tap first, then swipe up.</p>
+            </div>
+            <div class="cardFace back" id="revealBack"></div>
+          </div>
+          <div class="row" style="margin-top:14px">
+            <button id="goDiscussionBtn" class="warning hidden">Host: Start Discussion</button>
+          </div>
+        </section>
+
+        <section id="discussionScreen" class="hidden">
+          <h2 style="text-align:center;margin-bottom:0">Discussion</h2>
+          <div class="timer" id="timer">03:00</div>
+          <div class="row centerRow">
+            <button id="voteNowBtn" class="warning hidden">Host: Start Voting</button>
+          </div>
+        </section>
+
+        <section id="votingScreen" class="hidden">
+          <h2>Vote</h2>
+          <div id="votingBox" class="mini"></div>
+        </section>
+
+        <section id="resultsScreen" class="hidden">
+          <h2>Results</h2>
+          <div id="resultsBox" class="resultBox"></div>
+          <div class="row">
+            <button id="newRoundBtn" class="success hidden">Back To Lobby</button>
+          </div>
+        </section>
+      </div>
+
+      <div class="card">
+        <h2>Status</h2>
+        <div class="mini" id="statusBox">Ready to connect.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="confetti hidden" id="confetti"></div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
